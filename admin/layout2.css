@@ -1,0 +1,11 @@
+#hang2 a {
+    width: 290px;
+    padding: 10px;
+    background-color: #03F;
+    color: #FFF;
+    font-weight: bold;
+    display: block;
+    float: left;
+    margin-right: 1px;
+    text-align: center;
+}
