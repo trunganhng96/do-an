@@ -1,5 +1,5 @@
-<form method="POST">
-    <table>
+<form class="formLogin" method="POST">
+    <table class="tableLogin">
         <tr><h3>Thong Tin Dang nhap Admin</h3></tr>
         <tr>
             <td>Username</td>
@@ -13,7 +13,7 @@
         
         <tr>
             <td></td>
-            <td><input type="submit" id="login" name="login" value="Dang nhap"></td>
+            <td><input class="login" type="submit" id="login" name="login" value="Dang nhap"></td>
         </tr>
     </table>
 </form>

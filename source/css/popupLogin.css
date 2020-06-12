@@ -1,0 +1,41 @@
+.popupLogin {
+    background: rgba(0, 0, 0, .4);
+    cursor: pointer;
+    display: none;
+    height: 100%;
+    position: fixed;
+    text-align: center;
+    padding-top: 20%;
+    width: 100%;
+    z-index: 10000;
+}
+
+.tableLogin {
+    margin: auto;
+    vertical-align: middle;
+}
+
+.formLogin {
+    background-color: yellow;
+}
+
+.popupInfo {
+    background: rgba(0, 0, 0, .4);
+    cursor: pointer;
+    display: none;
+    height: 100%;
+    position: fixed;
+    text-align: center;
+    padding-top: 20%;
+    width: 100%;
+    z-index: 10000;
+}
+
+.tableInfo {
+    margin: auto;
+    vertical-align: middle;
+}
+
+.formInfo {
+    background-color: yellow;
+}

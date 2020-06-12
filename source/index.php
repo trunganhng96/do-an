@@ -15,13 +15,13 @@ require "lib/trangchu.php";
 <!-- formInfo -->
 <?php
     if ( isset($_POST["confirm"]) ) {
-        $username = $_POST["username"];
+        // $username = $_POST["username"];
         $age =  isset($_POST["age"]) ? $_POST["age"] : "";
         $category = isset($_POST["category"]) ? $_POST["category"] : "" ;
         $idUser = $_SESSION["idUser"];
         // SELECT * FROM `members` WHERE `membership_number` IN (1,2,3);
         $mysqli = mysqli_connect("localhost", "root", "", "vnexpress");
-        $qr = mysqli_query($mysqli, "INSERT INTO user (`idUser`,`idTL`, `idLT`, `rating`, `username`, `age`, `category`) VALUES($idUser, 0, 0, 0, '$username', '$age', $category)");
+        $qr = mysqli_query($mysqli, "INSERT INTO user (`idUser`,`idTL`, `idLT`, `rating`, `age`, `category`) VALUES($idUser, 0, 0, 0, '$age', $category)");
 
         $sql2 = "SELECT tin.* FROM tin Where tin.idTL = '".$category."' ORDER BY idTin DESC LIMIT 1,2";
         $qr2 = mysqli_query($mysqli, $sql2);
@@ -61,6 +61,12 @@ require "lib/trangchu.php";
             $qr7 = mysqli_query($mysqli, $sql7);
             $row7 = mysqli_fetch_all($qr7);
         }
+    }
+    if(isset($_POST['like'])){
+        $idLT = $_POST['hidden_idLT'];
+        $sql8 = "SELECT tin.* FROM tin where tin.idLT = ".$idLT." LIMIT 5";
+        $qr8 = mysqli_query($mysqli, $sql8);
+        $row8 = mysqli_fetch_all($qr8);   
     }
 ?>
 
@@ -146,9 +152,20 @@ require "lib/trangchu.php";
 <link rel="stylesheet" type="text/css" href="css/layoutkf.css" />
 <link rel="stylesheet" type="text/css" href="css/layoutulBlockMenu.css" />
 <link rel="stylesheet" type="text/css" href="css/layouttk.css" />
+<link rel="stylesheet" type="text/css" href="css/popupLogin.css" />
 </head>
 
+
 <body>
+
+<div class="popupLogin">
+    <?php require "blocks/formLogin.php" ?>
+</div>
+
+<div class="popupInfo">
+    <?php require "blocks/formInfo.php" ?>
+</div>
+
 <div id="wrap-vp">
 	<div id="header-vp">
     	<div id="logo"><a href="index.php"><img src="images/logo.gif" /></a></div>
@@ -216,11 +233,11 @@ require "lib/trangchu.php";
 		<!--blocks/cot_phai.php-->
             <?php
                 if( !isset($_SESSION["idUser"]) ) {
-                    require "blocks/formLogin.php";
-                    require "blocks/formInfo.php";
+                    // require "blocks/formLogin.php";
+                    // require "blocks/formInfo.php";
                 } else {
                     require "blocks/formHello.php";
-                    require "blocks/formInfo.php";
+                    // require "blocks/formInfo.php";
                 } 
             ?>
             <input type="hidden" id="hidden_idUser" value="<?php echo $row['idUser']; ?>">
@@ -259,13 +276,40 @@ require "lib/trangchu.php";
             </div>
         </div>
     </div>
-    
-    
-    
-    
 </div>
 <script>
+    $(window).load(function() {
+        $('.popupLogin').show();
+        $('.popupInfo').hide();
+        <?php if(  isset($_POST["login"]) ) { ?>
+        // $(".login").click(function(){
+        $('.popupLogin').hide();
 
+        // });
+        <?php } ?>
+
+        <?php if(  isset($_POST["login"]) ) { ?>
+        // $(".login").click(function(){
+
+        $('.popupInfo').show();
+        // });
+        <?php } ?>
+
+        <?php if(  isset($_POST["confirm"]) ) { ?>
+        // $(".login").click(function(){
+
+        $('.popupInfo').hide();
+        // });
+        <?php } ?>
+
+        <?php if(  isset($_POST["confirm"]) ) { ?>
+        // $(".login").click(function(){
+
+        $('.popupLogin').hide();
+        // });
+        <?php } ?>
+    });
 </script>
+
 </body>
 </html>

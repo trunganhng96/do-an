@@ -6,15 +6,60 @@
 	<div class="cat">
     <div class="main-cat">
       <?php 
-          if( !isset($_POST['confirm'])) {
-        ?>
-          <a href="index.php?p=tintrongloai&idLT=<?php echo $idLT ?>"><?php echo TenLoaiTin($idLT) ?></a>
-        <?php 
-        }else {
-        ?>
-        <a href="#">Gợi ý theo thể loại</a>
-        <?php } ?>
+        if( !isset($_POST['confirm'])) {
+      ?>
+        <a href="index.php?p=tintrongloai&idLT=<?php echo $idLT ?>"><?php echo TenLoaiTin($idLT) ?></a>
+      <?php 
+      }else {
+      ?>
+      <a href="#">Gợi ý theo thể loại</a>
+      <?php } ?>
     </div>
+
+      <?php
+        if( !isset( $_POST['confirm'] ) ) {
+      ?>
+
+      <div class="clear"></div>
+      <div class="cat-content">
+        <?php
+          $mottin = TinMoiNhat_TheoLoaiTin_MotTin($idLT);
+          $row_mottin = mysqli_fetch_assoc($mottin);
+        ?>
+          <div class="col1">
+            <div class="news">
+              <h3 class="title" >
+                <a href="index.php?p=chitiettin&idTin=<?php echo $row_mottin['idTin'] ?>">
+                  <?php echo $row_mottin['TieuDe']; ?>
+                </a>
+              </h3>
+              <img class="images_news" src="upload/tintuc/<?php echo $row_mottin['urlHinh']; ?>" align="left" />
+              <div class="des">
+                <?php echo $row_mottin['TomTat']; ?>  
+              </div>
+              <div class="clear"></div>          
+            </div>
+          </div>
+          <div class="col2">
+            <?php
+              $tinmoi_bontin = TinMoiNhat_TheoLoaiTin_BonTin($idLT);
+                while ( $row_tinmoi_bontin = mysqli_fetch_assoc($tinmoi_bontin) ) {
+            ?>
+              <h3 class="tlq">
+                <a href="index.php?p=chitiettin&idTin=<?php echo $row_tinmoi_bontin['idTin'] ?>">
+                  <?php echo $row_tinmoi_bontin['TieuDe']; ?>
+                </a>
+              </h3>  
+            <?php
+              };
+            ?>
+          </div> 
+      </div>
+
+      <?php
+        } else {
+      ?>
+
       <div class="clear"></div>
       <div class="cat-content">
           <div class="col1">
@@ -46,6 +91,7 @@
         ?>
       </div> 
     </div>
+    <?php } ?>
   </div>
 </div>
 <div class="clear"></div>
@@ -59,16 +105,61 @@
 	<div class="cat">
     <div class="main-cat">
       <?php 
-          if( !isset($_POST['confirm'])) {
-        ?>
-          <a href="index.php?p=tintrongloai&idLT=<?php echo $idLT ?>"><?php echo TenLoaiTin($idLT) ?></a>
-        <?php 
-        }else {
-          
-        ?>
-        <a href="#">Gợi ý theo độ tuổi</a>
-        <?php } ?>
+        if( !isset($_POST['confirm'])) {
+      ?>
+        <a href="index.php?p=tintrongloai&idLT=<?php echo $idLT ?>"><?php echo TenLoaiTin($idLT) ?></a>
+      <?php 
+      }else {
+        
+      ?>
+      <a href="#">Gợi ý theo độ tuổi</a>
+      <?php } ?>
     </div>
+
+    <?php
+        if( !isset( $_POST['confirm'] ) ) {
+      ?>
+
+      <div class="clear"></div>
+      <div class="cat-content">
+        <?php
+          $mottin = TinMoiNhat_TheoLoaiTin_MotTin($idLT);
+          $row_mottin = mysqli_fetch_assoc($mottin);
+        ?>
+          <div class="col1">
+            <div class="news">
+              <h3 class="title" >
+                <a href="index.php?p=chitiettin&idTin=<?php echo $row_mottin['idTin'] ?>">
+                  <?php echo $row_mottin['TieuDe']; ?>
+                </a>
+              </h3>
+              <img class="images_news" src="upload/tintuc/<?php echo $row_mottin['urlHinh']; ?>" align="left" />
+              <div class="des">
+                <?php echo $row_mottin['TomTat']; ?>  
+              </div>
+              <div class="clear"></div>          
+            </div>
+          </div>
+          <div class="col2">
+            <?php
+              $tinmoi_bontin = TinMoiNhat_TheoLoaiTin_BonTin($idLT);
+                while ( $row_tinmoi_bontin = mysqli_fetch_assoc($tinmoi_bontin) ) {
+            ?>
+              <h3 class="tlq">
+                <a href="index.php?p=chitiettin&idTin=<?php echo $row_tinmoi_bontin['idTin'] ?>">
+                  <?php echo $row_tinmoi_bontin['TieuDe']; ?>
+                </a>
+              </h3>  
+            <?php
+              };
+            ?>
+          </div> 
+      </div>
+
+      <?php
+        } else {
+      ?>
+
       <div class="clear"></div>
       <div class="cat-content">
         <?php
@@ -105,16 +196,19 @@
         ?>
       </div> 
     </div>
+        <?php } ?>
   </div>
 </div>
 <div class="clear"></div>
 <!-- //box cat -->
 
+
+
 <!-- box cat -->
 <?php
-  $idLT = rand(1,40);
+  // $idLT = rand(1,40);
 ?>
-<div class="box-cat">
+<!-- <div class="box-cat">
 	<div class="cat">
     <div class="main-cat">
       <?php 
@@ -151,21 +245,127 @@
               <div class="clear"></div>          
             </div>
           </div>
-      <div class="col2">
-        <?php
-          $tinmoi_bontin = TinMoiNhat_TheoLoaiTin_BonTin($idLT);
-            while ( $row_tinmoi_bontin = mysqli_fetch_assoc($tinmoi_bontin) ) {
+          <div class="col2">
+            <?php
+              $tinmoi_bontin = TinMoiNhat_TheoLoaiTin_BonTin($idLT);
+                while ( $row_tinmoi_bontin = mysqli_fetch_assoc($tinmoi_bontin) ) {
+            ?>
+              <h3 class="tlq">
+                <a href="index.php?p=chitiettin&idTin=<?php echo $row_tinmoi_bontin['idTin'] ?>">
+                  <?php echo $row_tinmoi_bontin['TieuDe']; ?>
+                </a>
+              </h3>  
+            <?php
+              };
+            ?>
+          </div> 
+      </div>
+  </div>
+</div>
+<div class="clear"></div> -->
+<!-- //box cat -->
+
+
+
+<!-- box cat -->
+<?php
+  $idLT =rand(1,40);
+?>
+<div class="box-cat">
+	<div class="cat">
+    <div class="main-cat">
+      <?php 
+          if( !isset($_POST['like'])) {
         ?>
-          <h3 class="tlq">
-            <a href="index.php?p=chitiettin&idTin=<?php echo $row_tinmoi_bontin['idTin'] ?>">
-              <?php echo $row_tinmoi_bontin['TieuDe']; ?>
-            </a>
-          </h3>  
-        <?php
-          };
+          <a href="index.php?p=tintrongloai&idLT=<?php echo $idLT ?>"><?php echo TenLoaiTin($idLT) ?></a>
+        <?php 
+        }else {
         ?>
-      </div> 
+        <a href="#">Gợi ý theo sở thích</a>
+        <?php } ?>
     </div>
+
+      <?php
+        if( !isset( $_POST['like'] ) ) {
+      ?>
+
+      <div class="clear"></div>
+      <div class="cat-content">
+        <?php
+          $mottin = TinMoiNhat_TheoLoaiTin_MotTin($idLT);
+          $row_mottin = mysqli_fetch_assoc($mottin);
+        ?>
+          <div class="col1">
+            <div class="news">
+              <h3 class="title" >
+                <a href="index.php?p=chitiettin&idTin=<?php echo $row_mottin['idTin'] ?>">
+                  <?php echo $row_mottin['TieuDe']; ?>
+                </a>
+              </h3>
+              <img class="images_news" src="upload/tintuc/<?php echo $row_mottin['urlHinh']; ?>" align="left" />
+              <div class="des">
+                <?php echo $row_mottin['TomTat']; ?>  
+              </div>
+              <div class="clear"></div>          
+            </div>
+          </div>
+          <div class="col2">
+            <?php
+              $tinmoi_bontin = TinMoiNhat_TheoLoaiTin_BonTin($idLT);
+                while ( $row_tinmoi_bontin = mysqli_fetch_assoc($tinmoi_bontin) ) {
+            ?>
+              <h3 class="tlq">
+                <a href="index.php?p=chitiettin&idTin=<?php echo $row_tinmoi_bontin['idTin'] ?>">
+                  <?php echo $row_tinmoi_bontin['TieuDe']; ?>
+                </a>
+              </h3>  
+            <?php
+              };
+            ?>
+          </div> 
+      </div>
+
+      <?php
+        } else {
+      ?>
+
+      <div class="clear"></div>
+      <div class="cat-content">
+        <?php
+          $mottin = TinMoiNhat_TheoLoaiTin_MotTin($idLT);
+          $row_mottin = mysqli_fetch_assoc($mottin);
+          // var_dump($row5);die;
+        ?>
+        <div class="col1">
+          <div class="news">
+            <h3 class="title" >
+              <a href="index.php?p=chitiettin&idTin=<?php echo (count($row8) > 0) ? $row8[0][0] : 0 ?>">
+                <?php echo (count($row8) > 0) ? $row8[0][1] : ""; ?>
+              </a>
+            </h3>
+            <img class="images_news" src="upload/tintuc/<?php echo (count($row8) > 0) ? $row8[0][4] : ""; ?>" align="left" />
+            <div class="des">
+              <?php echo (count($row8) > 0) ? $row8[0][3] : ""; ?>  
+            </div>
+            <div class="clear"></div>          
+          </div>
+        </div>
+        <div class="col2">
+          <?php
+            foreach($row8 as $key => $r8) {
+            if($key > 0){
+          ?>
+            <h3 class="tlq">
+              <a href="index.php?p=chitiettin&idTin=<?php echo $r8[0] ?>">
+                <?php echo $r8[1]; ?>
+              </a>
+            </h3>  
+          <?php
+            }}
+          ?>
+        </div> 
+      </div>
+          <?php } ?>
   </div>
 </div>
 <div class="clear"></div>
